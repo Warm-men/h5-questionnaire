@@ -1,0 +1,15 @@
+@import 'src/styles/flex_pt.scss';
+.introduce-container {
+    width: 100vw;
+    background-color: #40b7ff;
+    padding-bottom: flex_pt(80);
+    position: relative;
+    .banner-image {
+        width: 100vw;
+    }
+    .btn-image {
+        width: flex_pt(120);
+        display: block;
+        margin: flex_pt(-60) auto 0;
+    }
+}
