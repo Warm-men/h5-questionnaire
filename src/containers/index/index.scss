@@ -1,0 +1,14 @@
+@import 'src/styles/flex_pt.scss';
+.home-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #40b7ff;
+  .bg-image{
+      width: 100vw;
+  }
+  .btn-image {
+      display: block;
+      margin: flex_pt(-60) auto 0;
+      width: flex_pt(120);
+  }
+}
