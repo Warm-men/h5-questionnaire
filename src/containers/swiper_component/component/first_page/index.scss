@@ -1,0 +1,19 @@
+@import 'src/styles/flex_pt.scss';
+.first-page-container {
+    // width: 100vw;
+    // position: relative;
+    .bg-image {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+    }
+    .title-image {
+        width: flex_pt(340);
+        position: absolute;
+        top: flex_pt(140);
+        left: flex_pt(15);
+        img {
+            width: 100%;
+        }
+    }
+}
