@@ -4,7 +4,7 @@ import Swiper from 'react-id-swiper'
 import './index.scss'
 import 'swiper/css/swiper.min.css'
 import 'react-id-swiper/lib/styles/css/swiper.css'
-
+import { First, SecondPage, ThirdPage } from './component'
 class IndexContainer extends React.Component {
   constructor(props) {
     super()
@@ -22,21 +22,21 @@ class IndexContainer extends React.Component {
   render() {
     return (
       <div className="home-container">
-        <Helmet title="首页" link="index" />
+        <Helmet title="问卷" link="index" />
         <Swiper
           slideClass="custom-swiper-slide"
           wrapperClass="custom-swiper-wrapper"
           {...this.options}
         >
           <div className="swiper-image">
-            <img
-              src={require('./images/home_bg.jpg')}
-              alt=""
-              className="btn-image"
-            />
+            <First />
           </div>
-          <div className="swiper-image">2</div>
-          <div className="swiper-image">3</div>
+          <div className="swiper-image">
+            <SecondPage />
+          </div>
+          <div className="swiper-image">
+            <ThirdPage />
+          </div>
         </Swiper>
       </div>
     )
