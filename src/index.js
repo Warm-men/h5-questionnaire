@@ -5,7 +5,7 @@ import App from './router'
 // import * as serviceWorker from './serviceWorker';
 
 global.appid = 'wx58313e65238ddffa'
-global.apiUrl = 'https://activity.yypiano.cn'
+global.apiUrl = 'http://backend.zhihui92.cn'
 global.app_type = 1
 
 const first_url = window.location.href.split('return_uri=')
