@@ -4,7 +4,7 @@ import * as storage from './storage.js'
 const handlePathname = () => {
   const { pathname, host } = window.location
   if (pathname === '/index' || pathname === '/') {
-    return `http://${host}/index`
+    return `http://${host}/`
   } else {
     return `http://${window.location.host}${pathname}`
   }
@@ -44,7 +44,7 @@ const wxLogin = (reConnect, redirect_uri = defaultRedirectUrl) => {
   }
   const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${
     global.appid
-  }&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+  }&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`
   window.location.href = url
 }
 
