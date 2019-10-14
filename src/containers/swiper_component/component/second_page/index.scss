@@ -1,10 +1,7 @@
 @import 'src/styles/flex_pt.scss';
 .first-page-container {
-    width: 100vw;
-    position: relative;
-    .bg-image {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-    }
+  min-height: 100vh;
+  .bg-image {
+    width: 100%;
+  }
 }

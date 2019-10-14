@@ -1,11 +1,18 @@
 @import 'src/styles/flex_pt.scss';
 .home-container {
   width: 100vw;
-  .bg-image {
-    width: 100vw;
-  }
-  .swiper-image {
-    width: 100vw;
-    height: 50vh;
-  }
+}
+.custom-swiper-slide {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.custom-swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  transition-property: transform, -webkit-transform;
+  box-sizing: content-box;
 }
