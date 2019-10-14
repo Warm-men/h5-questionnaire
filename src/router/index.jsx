@@ -45,6 +45,7 @@ function App(props) {
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
                   setIsLogin(true)
+                  browserHistory.replace('/')
                 }
               })
             }
