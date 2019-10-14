@@ -1,7 +1,98 @@
 @import 'src/styles/flex_pt.scss';
-.first-page-container {
+.second-page-container {
   min-height: 100vh;
   .bg-image {
     width: 100%;
+    height: 100vh;
+  }
+  .title-image {
+    width: flex_pt(340);
+    position: absolute;
+    top: flex_pt(140);
+    left: flex_pt(15);
+    img {
+      width: 100%;
+    }
+  }
+  .coin-image {
+    width: flex_pt(340);
+    position: absolute;
+    top: flex_pt(275);
+    left: flex_pt(15);
+    img {
+        width: 100%;
+    }
+  }
+  .data-list-image {
+    width: flex_pt(330);
+    position: absolute;
+    top: flex_pt(275);
+    left: flex_pt(15);
+    img {
+        width: 100%;
+    }
+  }
+  .mouse-image {
+    width: flex_pt(45);
+    position: absolute;
+    top: flex_pt(245);
+    right: flex_pt(105);
+    img {
+        width: 100%;
+    }
+  }
+  .introdute-icon-image {
+    width: flex_pt(80);
+    position: absolute;
+    top: flex_pt(265);
+    right: flex_pt(125);
+    img {
+        width: 100%;
+    }
+  }
+  .men-image {
+    width: flex_pt(50);
+    position: absolute;
+    top: flex_pt(290);
+    right: flex_pt(180);
+    img {
+        width: 100%;
+    }
+  }
+  .women-image {
+    width: flex_pt(85);
+    position: absolute;
+    top: flex_pt(320);
+    left: flex_pt(30);
+    img {
+        width: 100%;
+    }
+  }
+  .fade-image{ 
+    width: flex_pt(125);
+    position: absolute;
+    top: flex_pt(410);
+    right: flex_pt(-15);
+    img {
+        width: 100%;
+    } 
+  }
+  .plant-image {
+    width: flex_pt(414);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    img{
+        width: 100%;
+    }
+  }
+  .bottom-button-image {
+    width: flex_pt(150);
+    position: absolute;
+    bottom: flex_pt(15);
+    right: flex_pt(116);
+    img{
+        width: 100%;
+    } 
   }
 }
