@@ -3,14 +3,72 @@
   min-height: 100vh;
   .bg-image {
     width: 100%;
+    min-height: 100vh;
   }
   .title-image {
     width: flex_pt(340);
     position: absolute;
     top: flex_pt(140);
     left: flex_pt(15);
+    opacity: 0;
+    &.animate {
+        animation: animate 1s;
+        opacity: 1;
+      }
     img {
       width: 100%;
     }
   }
+  .coin-image {
+    width: flex_pt(340);
+    position: absolute;
+    top: flex_pt(375);
+    left: flex_pt(15);
+    img {
+        width: 100%;
+    }
+  }
+  .loop-book-image {
+    width: flex_pt(370);
+    position: absolute;
+    top: flex_pt(320);
+    img {
+        width: 100%;
+    }
+  }
+  .rocket-image {
+    width: flex_pt(210);
+    position: absolute;
+    top: flex_pt(283);
+    right: flex_pt(30);
+    img{
+        width: 100%;
+    }
+  }
+  .plant-image {
+    width: flex_pt(414);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    img{
+        width: 100%;
+    }
+  }
+  .arrow-image {
+    width: flex_pt(30);
+    position: absolute;
+    bottom: 15px;
+    right: flex_pt(172); 
+    img {
+        width: 100%;
+    }
+  }
+}
+@keyframes animate {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
 }
