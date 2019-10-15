@@ -10,25 +10,23 @@ export default class QuizItem extends React.PureComponent {
     }
   }
   _updateAnswer = answerKey => {
+    let updateKey = ''
     let currentKey = ''
-    let preKey = this.state.currentAnswerKey
+    let preStateKey = this.state.currentAnswerKey
     const { updateAnswer, item } = this.props
     if (item.category_id === 3) {
-      if (preKey.indexOf(answerKey) !== -1) {
-        currentKey = preKey
-          .split(answerKey)
-          .join('')
-          .split('')
-          .join(',')
-        console.log(currentKey)
+      if (preStateKey.indexOf(answerKey) !== -1) {
+        currentKey = preStateKey.split(answerKey).join('')
       } else {
-        currentKey = preKey + `${answerKey}`
+        currentKey = preStateKey + `${answerKey}`
       }
+      updateKey = currentKey.split('').join(',')
     } else {
       currentKey = answerKey + ''
+      updateKey = answerKey + ''
     }
     this.setState({ currentAnswerKey: currentKey })
-    updateAnswer(item.id, currentKey)
+    updateAnswer(item.id, updateKey)
   }
   render() {
     const { item, index, superIndex } = this.props
