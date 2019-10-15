@@ -30,13 +30,15 @@ class ThirdPage extends React.Component {
     ajaxJsonp({
       url: '/api/Pintu/getQuestion',
       data: { token: storage.get('token', localStorage) },
+      method: 'POST',
       success: res => {
+        this.timer = null
         let { data } = res
-        console.log(res)
+        console.log(data)
         this.setState({ data })
       },
       error: e => {
-        console.log(e)
+        this.timer = setTimeout(this._queryQuiz, 2000)
       }
     })
   }
@@ -44,16 +46,16 @@ class ThirdPage extends React.Component {
   _checkFinishedQuiz = () => {
     let quizList = []
     this.state.data.map(item => {
-      return (quizList = [...quizList, ...item.list])
+      return item.list && (quizList = [...quizList, ...item.list])
     })
+    let textQuizCount = 0
+    quizList.map(item => item.category_id === 2 && textQuizCount++) //选填题目数目
     const resultLength = this.answer.length
-    if (resultLength < 39) {
-      return false
-    } else if (resultLength <= 39) {
-      const unRequiredIndex = quizList.findIndex(item => {
-        return this.answer.findIndex(answer => answer.id === item.id) === -1
+    if (resultLength <= quizList.length - textQuizCount) {
+      const unRequiredItem = quizList.filter(item => {
+        return this.answer.findIndex(answer => answer.id !== item.id) === -1
       })
-      if (quizList[unRequiredIndex].category_id === 1) {
+      if (unRequiredItem.category_id === 1) {
         //未完成单选题
         return false
       } else {
@@ -72,25 +74,29 @@ class ThirdPage extends React.Component {
   _hideAlert = () => this.setState({ isShowAlert: false })
 
   _submitQuiz = () => {
+    if (this.isLoading) return null
     const isFinishedQuiz = this._checkFinishedQuiz()
     if (!isFinishedQuiz) {
       this._showAlert()
       return null
     }
+    this.isLoading = true
     const currentData = {
       answer: this.answer
     }
-
     ajaxJsonp({
       url: '/api/Pintu/subQuestion',
       data: {
         token: storage.get('token', localStorage),
         param: JSON.stringify(currentData)
       },
+      method: 'POST',
       success: res => {
         console.log(res)
+        this.isLoading = false
       },
       error: e => {
+        this.isLoading = false
         console.log(e)
       }
     })

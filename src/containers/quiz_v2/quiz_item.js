@@ -6,39 +6,55 @@ export default class QuizItem extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      key: null
+      currentAnswerKey: ''
     }
   }
-  _updateAnswer = key => {
-    this.setState({ key })
+  _updateAnswer = answerKey => {
+    let currentKey = ''
+    let preKey = this.state.currentAnswerKey
     const { updateAnswer, item } = this.props
-    updateAnswer(item.id, key)
+    if (item.category_id === 3) {
+      if (preKey.indexOf(answerKey) !== -1) {
+        currentKey = preKey.split(answerKey).join('')
+      } else {
+        currentKey = preKey + `${answerKey}`
+      }
+    } else {
+      currentKey = answerKey + ''
+    }
+    this.setState({ currentAnswerKey: currentKey })
+    updateAnswer(item.id, currentKey)
   }
   render() {
     const { item, index, superIndex } = this.props
+    const { currentAnswerKey } = this.state
     const quizNum =
       superIndex === 0 ? superIndex * 6 + index + 1 : superIndex * 6 + index
+    const selectSet = JSON.parse(item.select_set)
     return (
       <div className="quesction-item">
         <div className="des-view">
           {`${quizNum}、`}
           {item.description}
         </div>
-        {item.category_id === 1 ? (
+        {item.category_id === 2 ? (
+          <FormText item={item} updateAnswer={this._updateAnswer} />
+        ) : (
           <div className="answer-view">
-            {item.select_set.map((answerItem, index) => {
+            {selectSet.map((answerItem, index) => {
+              const onFocus =
+                currentAnswerKey &&
+                currentAnswerKey.indexOf(answerItem.key) !== -1
               return (
                 <AnswerItem
                   item={answerItem}
                   key={index}
                   updateAnswer={this._updateAnswer}
-                  onFocus={this.state.key === answerItem.key}
+                  onFocus={onFocus}
                 />
               )
             })}
           </div>
-        ) : (
-          <FormText item={item} updateAnswer={this._updateAnswer} />
         )}
       </div>
     )
