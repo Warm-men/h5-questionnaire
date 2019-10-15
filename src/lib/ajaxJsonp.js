@@ -41,7 +41,7 @@ const fetchJsonp = formData => {
         handleError(error, data)
         return null
       }
-      data.code !== 200
+      data.code !== global.apiSuccess
         ? handleError(error, data)
         : handleSuccess(success, data)
     },

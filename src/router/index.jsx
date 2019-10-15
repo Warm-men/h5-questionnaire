@@ -23,8 +23,7 @@ class App extends React.PureComponent {
             code: search.code
           },
           success: res => {
-            console.log(res)
-            if (res.code === 1) {
+            if (res.code === global.apiSuccess) {
               const { openid, nickname, headimgurl } = res.data
               const data = {
                 open_id: openid,
@@ -41,6 +40,7 @@ class App extends React.PureComponent {
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
                   this.forceUpdate()
+                  browserHistory.replace('/')
                 }
               })
             }
