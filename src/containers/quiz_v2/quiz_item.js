@@ -30,7 +30,9 @@ export default class QuizItem extends React.PureComponent {
     const { currentAnswerKey } = this.state
     const quizNum =
       superIndex === 0 ? superIndex * 6 + index + 1 : superIndex * 6 + index
-    const selectSet = JSON.parse(item.select_set)
+
+    const selectSet = item.category_id !== 2 ? JSON.parse(item.select_set) : []
+
     return (
       <div className="quesction-item">
         <div className="des-view">
