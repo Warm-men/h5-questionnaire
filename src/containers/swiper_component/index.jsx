@@ -1,5 +1,5 @@
 import Helmet from 'src/lib/pagehelmet.js'
-import wxInit from 'src/lib/wx_config.js'
+// import wxInit from 'src/lib/wx_config.js'
 import Swiper from 'react-id-swiper'
 import './index.scss'
 import 'react-id-swiper/lib/styles/css/swiper.css'

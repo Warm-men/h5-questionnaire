@@ -71,4 +71,53 @@
             }
         }
     }
+    .text-view {
+        height: 100px;
+        width: 100%;
+        outline-color: transparent;
+        outline: none;
+        padding: 12px;
+        background: #fcfcfc;
+        border: 1px solid #efefef;
+        resize: none;
+        font-size: 14px;
+        color: #333;
+        border: none;
+        box-sizing: border-box;
+    }
+    .submit-button-view {
+        margin: flex_pt(30) 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .button-view {
+            width: flex_pt(120);
+            img {
+                width: 100%;
+            }
+        }
+        
+    }
+    .hidden-view {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba($color: #fff, $alpha: 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .text-view {
+            width: flex_pt(130);
+            padding: 10px 16px;
+            background-color: rgba($color: #000000, $alpha: 0.8);
+            color: #fff;
+            font-size: 14px;
+            line-height: 24px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
 }
