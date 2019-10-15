@@ -84,6 +84,8 @@ class ThirdPage extends React.Component {
     const currentData = {
       answer: this.answer
     }
+    console.log(currentData)
+
     ajaxJsonp({
       url: '/api/Pintu/subQuestion',
       data: {
