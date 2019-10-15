@@ -9,7 +9,8 @@ class ThirdPage extends React.Component {
     super(props)
     this.state = {
       data: [],
-      isShowAlert: false
+      isShowAlert: false,
+      isShowFinishedAlert: false
     }
     this.answer = []
   }
@@ -34,7 +35,6 @@ class ThirdPage extends React.Component {
       success: res => {
         this.timer = null
         let { data } = res
-        console.log(data)
         this.setState({ data })
       },
       error: e => {
@@ -52,10 +52,12 @@ class ThirdPage extends React.Component {
     quizList.map(item => item.category_id === 2 && textQuizCount++) //选填题目数目
     const resultLength = this.answer.length
     if (resultLength <= quizList.length - textQuizCount) {
-      const unRequiredItem = quizList.filter(item => {
-        return this.answer.findIndex(answer => answer.id !== item.id) === -1
-      })
-      if (unRequiredItem.category_id === 1) {
+      const ids = this.answer.map(item => item.id)
+      const unRequiredQuiz = quizList.filter(item => !ids.includes(item.id))
+      const unRequiredQuizIdIndex = unRequiredQuiz.findIndex(
+        item => item.category_id === 1 || item.category_id === 3
+      )
+      if (unRequiredQuizIdIndex !== -1) {
         //未完成单选题
         return false
       } else {
@@ -81,30 +83,35 @@ class ThirdPage extends React.Component {
       return null
     }
     this.isLoading = true
-    const currentData = {
-      answer: this.answer
-    }
-    console.log(currentData)
 
     ajaxJsonp({
       url: '/api/Pintu/subQuestion',
       data: {
         token: storage.get('token', localStorage),
-        param: JSON.stringify(currentData)
+        params: {
+          answer: JSON.stringify(this.answer)
+        }
       },
       method: 'POST',
       success: res => {
-        console.log(res)
+        this._hanldeFinishedSub()
         this.isLoading = false
       },
-      error: e => {
+      error: () => {
         this.isLoading = false
-        console.log(e)
       }
     })
   }
+
+  _hanldeFinishedSub = () => this.setState({ isShowFinishedAlert: true })
+
+  _onClosePage = () => {
+    this.setState({ isShowFinishedAlert: false }, () => {
+      this.props.history.push('/index')
+    })
+  }
   render() {
-    const { data, isShowAlert } = this.state
+    const { data, isShowAlert, isShowFinishedAlert } = this.state
     if (!data.length) return null
     return (
       <div className="third-page-container">
@@ -114,10 +121,19 @@ class ThirdPage extends React.Component {
             <div className="text-view">请回答完题目再提交哦!</div>
           </div>
         ) : null}
+        {isShowFinishedAlert ? (
+          <div className="finished-view">
+            <div className="image-view">
+              <div className="close-button" onClick={this._onClosePage} />
+              <img src={require('./images/finished_image.png')} alt="" />
+            </div>
+          </div>
+        ) : null}
+
         <div className="bg-image">
           <img src={require('./images/page3_bg.png')} alt="" />
         </div>
-        <div className="third-wrapper">
+        <div>
           <div className="title-view">
             <img src={require('./images/page3_top_title.png')} alt="" />
           </div>
