@@ -18,7 +18,7 @@ const wxInit = (isFirstConfigUrl = true) => {
   }
   const url = whichUrl(isFirstConfigUrl)
   ajax({
-    url: global.apiUrl + '/api/account/getWechatConfig',
+    url: global.apiUrl + '/api/Account/getWechatConfig',
     type: 'GET',
     data: {
       url

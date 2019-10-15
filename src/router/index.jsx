@@ -23,6 +23,7 @@ class App extends React.PureComponent {
             code: search.code
           },
           success: res => {
+            console.log(res)
             if (res.code === 1) {
               const { openid, nickname, headimgurl } = res.data
               const data = {
