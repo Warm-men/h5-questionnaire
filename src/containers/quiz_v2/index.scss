@@ -120,4 +120,27 @@
             text-align: center;
         }
     }
+    .finished-view {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba($color: #000, $alpha: 0.45);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .image-view {
+            width: flex_pt(330);
+            position: relative;
+            .close-button {
+                width: flex_pt(80);
+                height: flex_pt(80);
+                position: absolute;
+                top: 10px;
+                right: 30px;
+            }
+            img{
+                width: 100%;
+            }
+        }
+    }
 }

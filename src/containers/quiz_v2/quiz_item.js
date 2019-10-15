@@ -15,7 +15,12 @@ export default class QuizItem extends React.PureComponent {
     const { updateAnswer, item } = this.props
     if (item.category_id === 3) {
       if (preKey.indexOf(answerKey) !== -1) {
-        currentKey = preKey.split(answerKey).join('')
+        currentKey = preKey
+          .split(answerKey)
+          .join('')
+          .split('')
+          .join(',')
+        console.log(currentKey)
       } else {
         currentKey = preKey + `${answerKey}`
       }
