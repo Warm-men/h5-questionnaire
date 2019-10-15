@@ -26,11 +26,11 @@ const handleData = (data, isNotParams) => {
 }
 
 const fetchJsonp = formData => {
-  let { url, data, success, error, isNotParams } = formData
+  let { url, data, success, error, isNotParams, method } = formData
   ajax({
     url: global.apiUrl + url,
     data: handleData(data, isNotParams),
-    type: 'GET',
+    type: method ? method : 'GET',
     dataType: 'jsonp', //指定服务器返回的数据类型
     success: data => {
       if (data.code === 1005) {
@@ -41,7 +41,9 @@ const fetchJsonp = formData => {
         handleError(error, data)
         return null
       }
-      data.code !== 1 ? handleError(error, data) : handleSuccess(success, data)
+      data.code !== 200
+        ? handleError(error, data)
+        : handleSuccess(success, data)
     },
     error: data => {
       handleError(error, data)

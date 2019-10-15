@@ -4,6 +4,7 @@ import QuizItem from './quiz_item'
 export default class ListItem extends React.PureComponent {
   render() {
     const { item, index, updateAnswer } = this.props
+    if (!item.list || !item.list.length) return null
     const titleText = index === 0 ? '一、基本情况' : '二、调研问卷'
     return (
       <div className="quiz-view">
