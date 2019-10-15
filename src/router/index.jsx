@@ -1,6 +1,5 @@
 import { Router } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
-import { useEffect, useState } from 'react'
 import Routers from './routers'
 import ajaxJsonp from 'src/lib/ajaxJsonp.js'
 import wxLogin from 'src/lib/wx_login.js'
@@ -9,15 +8,11 @@ import { parseQueryString } from 'src/lib/parseQueryString.js'
 
 const browserHistory = createBrowserHistory()
 
-function App(props) {
-  const [isLogin, setIsLogin] = useState(
-    storage.get('refresh_token', localStorage)
-  )
-
-  useEffect(() => {
+class App extends React.PureComponent {
+  componentDidMount() {
     const search = parseQueryString(window.location.search)
     // 新用户还没有登录过
-    if (!isLogin) {
+    if (!storage.get('refresh_token', localStorage)) {
       if (_.isEmpty(search.code)) {
         wxLogin()
       } else {
@@ -44,8 +39,7 @@ function App(props) {
                   const { refresh_token, token } = loginRes.data
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
-                  setIsLogin(true)
-                  browserHistory.replace('/')
+                  this.forceUpdate()
                 }
               })
             }
@@ -55,13 +49,19 @@ function App(props) {
     } else {
       console.log('登录过！')
     }
-  }, [])
+  }
 
-  return isLogin ? (
-    <Router history={browserHistory}>
-      <Routers />
-    </Router>
-  ) : null
+  render() {
+    if (storage.get('refresh_token', localStorage)) {
+      return (
+        <Router history={browserHistory}>
+          <Routers />
+        </Router>
+      )
+    } else {
+      return null
+    }
+  }
 }
 
 export default App

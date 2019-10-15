@@ -9,6 +9,7 @@ class SecondPage extends React.PureComponent {
   }
   _showInroduction = () => this.setState({ isShowIntroduction: true })
   _hideInroduction = () => this.setState({ isShowIntroduction: false })
+  _goQuizPage = () => this.props.history.push('/quiz')
   render() {
     const { currentPageIndex } = this.props
     const onFocus = currentPageIndex === 1
@@ -57,7 +58,7 @@ class SecondPage extends React.PureComponent {
         <div className="plant-image">
           <img src={require('../first_page/images/plant.png')} alt="" />
         </div>
-        <div className={bottomButtonStyle}>
+        <div className={bottomButtonStyle} onClick={this._goQuizPage}>
           <img src={require('./images/page2_bottom_button.png')} alt="" />
         </div>
         {this.state.isShowIntroduction ? (
