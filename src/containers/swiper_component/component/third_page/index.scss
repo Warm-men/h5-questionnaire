@@ -1,7 +1,31 @@
 @import 'src/styles/flex_pt.scss';
-.first-page-container {
+.third-page-container {
   min-height: 100vh;
   .bg-image {
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    img{
+        width: 100%;
+    }
+  }
+  .third-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow-y: scroll;
+    .title-view {
+        text-align: center;
+        padding-top: flex_pt(30);
+        img {
+            width: flex_pt(240);
+        }
+    }
+    .sub-title-view {
+        text-align: center;
+        img {
+            width: flex_pt(314);
+        }
+    }
   }
 }
