@@ -27,10 +27,13 @@ class SecondPage extends React.PureComponent {
     return (
       <div className="second-page-container">
         <img
-          src={require('../first_page/images/page1_bg.png')}
+          src={require('../first_page/images/commem_bg.jpg')}
           alt=""
           className="bg-image"
         />
+        <div className="super-title-image">
+          <img src={require('../first_page/images/super_title.png')} alt="" />
+        </div>
         <div className={titleStyle}>
           <img src={require('../first_page/images/title.png')} alt="" />
         </div>
@@ -56,7 +59,7 @@ class SecondPage extends React.PureComponent {
           <img src={require('./images/page2_fade_img_icon.png')} alt="" />
         </div>
         <div className="plant-image">
-          <img src={require('../first_page/images/plant.png')} alt="" />
+          <img src={require('../first_page/images/plant_v2.png')} alt="" />
         </div>
         <div className={bottomButtonStyle} onClick={this._goQuizPage}>
           <img src={require('./images/page2_bottom_button.png')} alt="" />

@@ -5,6 +5,15 @@
     width: 100%;
     min-height: 100vh;
   }
+  .super-title-image {
+    width: flex_pt(250);
+    position: absolute;
+    top: flex_pt(40);
+    left: flex_pt(55);
+    img{
+      width: 100%;
+    }
+  }
   .title-image {
     width: flex_pt(340);
     position: absolute;
@@ -64,7 +73,7 @@
   .plant-image {
     width: flex_pt(414);
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     right: 0;
     img{
         width: 100%;
