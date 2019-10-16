@@ -6,9 +6,17 @@ import './index.scss'
 import 'react-id-swiper/lib/styles/css/swiper.css'
 import { First, SecondPage } from './component'
 
+const urlTimestamp = url => {
+  const getTimestamp = new Date().getTime()
+  const randomNum = Math.floor(Math.random() * 1000)
+  return url.indexOf('?') > -1
+    ? `${url}&timestamp=${getTimestamp}${randomNum}`
+    : `${url}?timestamp=${getTimestamp}${randomNum}`
+}
+
 const share = {
   title: '分享标题哈哈！',
-  link: 'http://front.zhihui92.cn/',
+  link: urlTimestamp('http://front.zhihui92.cn/'),
   imgUrl: '',
   desc: '分享猫叔！！！'
 }
