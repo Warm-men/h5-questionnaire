@@ -22,7 +22,7 @@ const share = {
 }
 
 export default function IndexContainer(props) {
-  const [currentPageIndex, setIndex] = useState(0)
+  const [currentPageIndex, setIndex] = useState(-1)
   const options = {
     direction: 'vertical',
     on: {
@@ -69,6 +69,10 @@ export default function IndexContainer(props) {
       onMenuShareTimeline()
       onMenuShareAppMessage()
     })
+  }, [])
+
+  useEffect(() => {
+    setIndex(0)
   }, [])
 
   return (
