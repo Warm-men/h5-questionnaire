@@ -26,6 +26,9 @@ export default function FirstPage(props) {
         alt=""
         className="bg-image"
       />
+      <div className="plant-image">
+        <img src={require('./images/plant_v2.png')} alt="" />
+      </div>
       <div className="super-title-image">
         <img src={require('./images/super_title.png')} alt="" />
       </div>
@@ -43,9 +46,6 @@ export default function FirstPage(props) {
       </div>
       <div className={pageStyle.rocketStyle}>
         <img src={require('./images/page1_rocket_v2.png')} alt="" />
-      </div>
-      <div className="plant-image">
-        <img src={require('./images/plant_v2.png')} alt="" />
       </div>
       <div className="arrow-image fadeInDown">
         <img src={require('./images/arrow_down.png')} alt="" />

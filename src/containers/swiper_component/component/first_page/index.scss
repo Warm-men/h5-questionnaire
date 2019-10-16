@@ -73,8 +73,9 @@
   .plant-image {
     width: flex_pt(414);
     position: absolute;
-    bottom: -10px;
+    bottom: -3px;
     right: 0;
+    z-index: 1;
     img{
         width: 100%;
     }
@@ -84,6 +85,7 @@
     position: absolute;
     bottom: 10px;
     right: flex_pt(172); 
+    z-index: 2;
     &.fadeInDown {
         animation: fadeInDown 2s infinite;
         opacity: 1;
