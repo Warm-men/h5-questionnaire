@@ -17,14 +17,14 @@ class ThirdPage extends React.Component {
   componentDidMount() {
     this._queryQuiz()
   }
-  _updateAnswer = (id, key) => {
+  _updateAnswer = (id, key, category_id) => {
     if (!id) return
     const index = this.answer.findIndex(item => item.id === id)
 
     if (index !== -1) {
-      this.answer[index] = { id, user_answer: key }
+      this.answer[index] = { id, user_answer: key, category_id }
     } else {
-      this.answer.push({ id, user_answer: key })
+      this.answer.push({ id, user_answer: key, category_id })
     }
   }
   _queryQuiz = () => {
