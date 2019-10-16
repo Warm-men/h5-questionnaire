@@ -26,13 +26,13 @@ export default class QuizItem extends React.PureComponent {
       updateKey = answerKey + ''
     }
     this.setState({ currentAnswerKey: currentKey })
-    updateAnswer(item.id, updateKey)
+    updateAnswer(item.id, updateKey, item.category_id)
   }
   render() {
     const { item, index, superIndex } = this.props
     const { currentAnswerKey } = this.state
     const quizNum =
-      superIndex === 0 ? superIndex * 6 + index + 1 : superIndex * 6 + index
+      superIndex === 0 ? superIndex * 5 + index + 1 : superIndex * 5 + index
 
     const selectSet = item.category_id !== 2 ? JSON.parse(item.select_set) : []
 
