@@ -39,8 +39,9 @@ class App extends React.PureComponent {
                   const { refresh_token, token } = loginRes.data
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
-                  this.forceUpdate()
+                  console.log(browserHistory)
                   browserHistory.replace('/')
+                  this.forceUpdate()
                 }
               })
             }

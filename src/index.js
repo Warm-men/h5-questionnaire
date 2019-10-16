@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './router'
-// import * as serviceWorker from './serviceWorker';
 
 global.appid = 'wx58313e65238ddffa'
 global.apiUrl = 'http://backend.zhihui92.cn'
@@ -20,8 +19,3 @@ const first_url = window.location.href.split('return_uri=')
 global.FIRST_URL = first_url[1] ? first_url[1] : first_url[0]
 
 ReactDOM.render(<App />, document.getElementById('root'))
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-// serviceWorker.unregister();
