@@ -139,7 +139,7 @@ class ThirdPage extends React.Component {
           </div>
           <div className="sub-title-view">
             <img
-              src={require('../../containers/swiper_component/component/first_page/images/title.png')}
+              src={require('../../containers/swiper_component/component/second_page/images/title.png')}
               alt=""
             />
           </div>
