@@ -124,7 +124,7 @@
         width: 100vw;
         height: 100vh;
         position: fixed;
-        background-color: rgba($color: #000, $alpha: 0.45);
+        background-color: rgba($color: #000, $alpha: 0.65);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -135,12 +135,28 @@
                 width: flex_pt(80);
                 height: flex_pt(80);
                 position: absolute;
-                top: 10px;
-                right: 30px;
+                top: -20px;
+                right: 0px;
+            }
+            .open-guid {
+                width: flex_pt(150);
+                height: flex_pt(60);
+                position: absolute;
+                bottom: 20px;
+                right: 90px;
             }
             img{
                 width: 100%;
             }
+        }
+        .guid-view {
+            width: flex_pt(130);
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            img {
+                width: 100%;
+            } 
         }
     }
 }

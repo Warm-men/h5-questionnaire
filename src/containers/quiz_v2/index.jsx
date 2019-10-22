@@ -10,7 +10,8 @@ class ThirdPage extends React.Component {
     this.state = {
       data: [],
       isShowAlert: false,
-      isShowFinishedAlert: false
+      isShowFinishedAlert: false,
+      showShareGuid: false
     }
     this.answer = []
   }
@@ -106,12 +107,15 @@ class ThirdPage extends React.Component {
   _hanldeFinishedSub = () => this.setState({ isShowFinishedAlert: true })
 
   _onClosePage = () => {
-    this.setState({ isShowFinishedAlert: false }, () => {
+    this.setState({ isShowFinishedAlert: false, showShareGuid: false }, () => {
       this.props.history.push('/index')
     })
   }
+
+  _openGuid = () => this.setState({ showShareGuid: true })
+
   render() {
-    const { data, isShowAlert, isShowFinishedAlert } = this.state
+    const { data, isShowAlert, isShowFinishedAlert, showShareGuid } = this.state
     if (!data.length) return null
     return (
       <div className="third-page-container">
@@ -126,7 +130,13 @@ class ThirdPage extends React.Component {
             <div className="image-view">
               <div className="close-button" onClick={this._onClosePage} />
               <img src={require('./images/finished_image.png')} alt="" />
+              <div className="open-guid" onClick={this._openGuid} />
             </div>
+            {showShareGuid ? (
+              <div className="guid-view">
+                <img src={require('./images/share_arrow.png')} alt="" />
+              </div>
+            ) : null}
           </div>
         ) : null}
 
@@ -135,7 +145,10 @@ class ThirdPage extends React.Component {
         </div>
         <div>
           <div className="title-view">
-            <img src={require('./images/page3_top_title.png')} alt="" />
+            <img
+              src={require('../swiper_component/component/second_page/images/super_title.png')}
+              alt=""
+            />
           </div>
           <div className="sub-title-view">
             <img
