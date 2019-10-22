@@ -4,7 +4,7 @@ import wxInit from 'src/lib/wx_config.js'
 import Swiper from 'react-id-swiper'
 import './index.scss'
 import 'react-id-swiper/lib/styles/css/swiper.css'
-import { First, SecondPage } from './component'
+import { FirstPage, SecondPage, ThirdPage } from './component'
 
 const urlTimestamp = url => {
   const getTimestamp = new Date().getTime()
@@ -84,10 +84,13 @@ export default function IndexContainer(props) {
         {...options}
       >
         <div className="swiper-image">
-          <First currentPageIndex={currentPageIndex} />
+          <FirstPage currentPageIndex={currentPageIndex} />
         </div>
         <div className="swiper-image">
-          <SecondPage
+          <SecondPage currentPageIndex={currentPageIndex} />
+        </div>
+        <div className="swiper-image">
+          <ThirdPage
             currentPageIndex={currentPageIndex}
             history={props.history}
           />

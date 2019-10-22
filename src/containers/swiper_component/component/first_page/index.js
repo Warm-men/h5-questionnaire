@@ -6,15 +6,13 @@ export default function FirstPage(props) {
   const pageStyle = useMemo(() => {
     if (currentPageIndex === 0) {
       return {
-        titleStyle: 'jackInTheBox title-image',
-        cloudStyle: 'cloud-image fadeIn',
-        rocketStyle: 'rocket-image fadeInLeftBig'
+        titleStyle: 'heartBaet title-image',
+        wemenImage: 'wemen-image fadeInLeft'
       }
     } else {
       return {
         titleStyle: 'title-image',
-        cloudStyle: 'cloud-image',
-        rocketStyle: 'rocket-image'
+        wemenImage: 'wemen-image'
       }
     }
   }, [currentPageIndex])
@@ -22,33 +20,21 @@ export default function FirstPage(props) {
   return (
     <div className="first-page-container">
       <img
-        src={require('./images/commem_bg.jpg')}
+        src={require('./images/home_page_bg.png')}
         alt=""
         className="bg-image"
       />
-      <div className="plant-image">
-        <img src={require('./images/plant_v2.png')} alt="" />
-      </div>
-      <div className="super-title-image">
-        <img src={require('./images/super_title.png')} alt="" />
-      </div>
       <div className={pageStyle.titleStyle}>
-        <img src={require('./images/title.png')} alt="" />
+        <img src={require('./images/home_page_title.png')} alt="" />
       </div>
-      <div className="loop-book-image">
-        <img src={require('./images/page1_loop_book_v3.png')} alt="" />
+      <div className="cell-phone-image">
+        <img src={require('./images/home_page_cell_phone.png')} alt="" />
       </div>
-      <div className={pageStyle.cloudStyle}>
-        <img src={require('./images/page1_cloud_v2.png')} alt="" />
-      </div>
-      <div className="coin-image">
-        <img src={require('./images/page1_coin.png')} alt="" />
-      </div>
-      <div className={pageStyle.rocketStyle}>
-        <img src={require('./images/page1_rocket_v2.png')} alt="" />
+      <div className={pageStyle.wemenImage}>
+        <img src={require('./images/home_page_wemen.png')} alt="" />
       </div>
       <div className="arrow-image fadeInDown">
-        <img src={require('./images/arrow_down.png')} alt="" />
+        <img src={require('../second_page/images/arrow_down.png')} alt="" />
       </div>
     </div>
   )

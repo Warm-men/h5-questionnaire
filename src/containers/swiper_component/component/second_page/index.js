@@ -1,80 +1,55 @@
+import { useMemo } from 'react'
 import './index.scss'
 
-class SecondPage extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isShowIntroduction: false
+export default function SecondPage(props) {
+  const { currentPageIndex } = props
+  const pageStyle = useMemo(() => {
+    if (currentPageIndex === 1) {
+      return {
+        titleStyle: 'jackInTheBox title-image',
+        cloudStyle: 'cloud-image fadeIn',
+        rocketStyle: 'rocket-image fadeInLeftBig'
+      }
+    } else {
+      return {
+        titleStyle: 'title-image',
+        cloudStyle: 'cloud-image',
+        rocketStyle: 'rocket-image'
+      }
     }
-  }
-  _showInroduction = () => this.setState({ isShowIntroduction: true })
-  _hideInroduction = () => this.setState({ isShowIntroduction: false })
-  _goQuizPage = () => this.props.history.push('/quiz')
-  render() {
-    const { currentPageIndex } = this.props
-    const onFocus = currentPageIndex === 1
-    const titleStyle = onFocus ? 'jackInTheBox title-image' : 'title-image'
-    const bottomButtonStyle = onFocus
-      ? 'bottom-button-image slideInDown'
-      : 'bottom-button-image'
-    const dataListStyle = onFocus ? 'jello data-list-image' : 'data-list-image'
-    const menStyle = onFocus ? 'men-image shake' : 'men-image'
-    const introduteIconStyle = onFocus
-      ? 'introdute-icon-image fadeIn'
-      : 'introdute-icon-image'
-    const mouseStyle = onFocus ? 'mouse-image fadeIn' : 'mouse-image'
-    const womenStyle = onFocus ? 'women-image slideInLeft' : 'mouse-image'
-    return (
-      <div className="second-page-container">
-        <img
-          src={require('../first_page/images/commem_bg.jpg')}
-          alt=""
-          className="bg-image"
-        />
-        <div className="super-title-image">
-          <img src={require('../first_page/images/super_title.png')} alt="" />
-        </div>
-        <div className={titleStyle}>
-          <img src={require('../first_page/images/title.png')} alt="" />
-        </div>
-        <div className={dataListStyle}>
-          <img src={require('./images/page2_data_list.png')} alt="" />
-        </div>
-        <div className="coin-image">
-          <img src={require('../first_page/images/page1_coin.png')} alt="" />
-        </div>
-        <div onClick={this._showInroduction} className={mouseStyle}>
-          <img src={require('./images/page2_mouse_icon.png')} alt="" />
-        </div>
-        <div onClick={this._showInroduction} className={introduteIconStyle}>
-          <img src={require('./images/page2_introdute_icon.png')} alt="" />
-        </div>
-        <div className={menStyle}>
-          <img src={require('./images/page2_men.png')} alt="" />
-        </div>
-        <div className={womenStyle}>
-          <img src={require('./images/page2_women.png')} alt="" />
-        </div>
-        <div className="fade-image">
-          <img src={require('./images/page2_fade_img_icon.png')} alt="" />
-        </div>
-        <div className="plant-image">
-          <img src={require('../first_page/images/plant_v2.png')} alt="" />
-        </div>
-        <div className={bottomButtonStyle} onClick={this._goQuizPage}>
-          <img src={require('./images/page2_bottom_button.png')} alt="" />
-        </div>
-        {this.state.isShowIntroduction ? (
-          <div className="pop-wrapper-view">
-            <div className={'introduction-image fadeIn'}>
-              <div className="hide-button" onClick={this._hideInroduction} />
-              <img src={require('./images/page2_introdution_pop.png')} alt="" />
-            </div>
-          </div>
-        ) : null}
-      </div>
-    )
-  }
-}
+  }, [currentPageIndex])
 
-export default SecondPage
+  return (
+    <div className="second-page-container">
+      <img
+        src={require('./images/commem_bg.jpg')}
+        alt=""
+        className="bg-image"
+      />
+      <div className="plant-image">
+        <img src={require('./images/plant_v2.png')} alt="" />
+      </div>
+      <div className="super-title-image">
+        <img src={require('./images/super_title.png')} alt="" />
+      </div>
+      <div className={pageStyle.titleStyle}>
+        <img src={require('./images/title.png')} alt="" />
+      </div>
+      <div className="loop-book-image">
+        <img src={require('./images/page1_loop_book_v3.png')} alt="" />
+      </div>
+      <div className={pageStyle.cloudStyle}>
+        <img src={require('./images/page1_cloud_v2.png')} alt="" />
+      </div>
+      <div className="coin-image">
+        <img src={require('./images/page1_coin.png')} alt="" />
+      </div>
+      <div className={pageStyle.rocketStyle}>
+        <img src={require('./images/page1_rocket_v2.png')} alt="" />
+      </div>
+      <div className="arrow-image fadeInDown">
+        <img src={require('./images/arrow_down.png')} alt="" />
+      </div>
+    </div>
+  )
+}
