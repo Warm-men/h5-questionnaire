@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 const Home = lazy(() => import('src/containers/swiper_component'))
 const Quiz = lazy(() => import('src/containers/quiz_v2'))
 
-function Routers(props) {
+function Routers() {
   return (
     <Switch>
       <Suspense fallback={<div>Loding...</div>}>

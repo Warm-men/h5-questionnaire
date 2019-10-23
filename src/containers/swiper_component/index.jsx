@@ -15,10 +15,11 @@ const urlTimestamp = url => {
 }
 
 const share = {
-  title: '分享标题哈哈！',
+  title: '互联网金融消费者权益保护大调查',
   link: urlTimestamp('http://front.zhihui92.cn/'),
-  imgUrl: '',
-  desc: '分享猫叔！！！'
+  imgUrl:
+    'http://backend.zhihui92.cn/uploads/20191023/fa3d63c4f71b76e59eb34ad8a4107389.jpg',
+  desc: '中国互联网金融协会邀您参与金融消费者权益保护现状调研，期待您的参与！'
 }
 
 export default function IndexContainer(props) {

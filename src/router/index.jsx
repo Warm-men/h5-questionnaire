@@ -9,7 +9,7 @@ import { parseQueryString } from 'src/lib/parseQueryString.js'
 
 const browserHistory = history.createBrowserHistory()
 
-function App() {
+export default function App() {
   const [isLogin, setIsLogin] = useState(
     storage.get('refresh_token', localStorage)
   )
@@ -24,9 +24,7 @@ function App() {
         ajaxJsonp({
           url: '/api/account/wchatH5Login',
           isNotParams: true,
-          data: {
-            code: search.code
-          },
+          data: { code: search.code },
           success: res => {
             if (res.code === global.apiSuccess) {
               const { openid, nickname, headimgurl } = res.data
@@ -67,5 +65,3 @@ function App() {
     return null
   }
 }
-
-export default App
