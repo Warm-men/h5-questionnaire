@@ -15,7 +15,7 @@ const urlTimestamp = url => {
 }
 
 const share = {
-  title: '互联网金融消费者权益保护小调研',
+  title: '互联网金融消费知识小调研',
   link: urlTimestamp('http://front.zhihui92.cn/'),
   imgUrl:
     'http://backend.zhihui92.cn/uploads/20191023/fa3d63c4f71b76e59eb34ad8a4107389.jpg',

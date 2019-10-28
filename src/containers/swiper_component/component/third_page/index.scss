@@ -17,10 +17,10 @@
   .title-image {
     width: flex_pt(340);
     position: absolute;
-    top: flex_pt(140);
+    top: flex_pt(115);
     left: flex_pt(15);
     &.jackInTheBox {
-        animation: jackInTheBox 1s;
+        animation: jackInTheBox .5s;
         opacity: 1;
     }
     img {
@@ -45,7 +45,7 @@
         width: 100%;
     }
     &.jello {
-        animation: jello 2.5s 1.2s;
+        animation: jello 1s .5s;
         opacity: 1;
     }
   }
@@ -71,7 +71,7 @@
         width: 100%;
     }
     &.fadeIn {
-        animation: fadeIn 1s 4.5s;
+        animation: fadeIn .4s 2.4s;
         opacity: 1;
     }
   }
@@ -84,7 +84,7 @@
         width: 100%;
     }
     &.shake {
-        animation: shake 1s 3.5s;
+        animation: shake 1s 1.5s;
         opacity: 1;
     }
   }
@@ -98,7 +98,7 @@
         width: 100%;
     }
     &.slideInLeft {
-        animation: slideInLeft 1s 5.5s;
+        animation: slideInLeft .4s 2.5s;
         opacity: 1;
     }
   }

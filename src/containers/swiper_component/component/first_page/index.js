@@ -28,7 +28,7 @@ export default function FirstPage(props) {
         <img src={require('./images/home_page_title.png')} alt="" />
       </div>
       <div className="cell-phone-image">
-        <img src={require('./images/home_page_cell_phone.jpg')} alt="" />
+        <img src={require('./images/home_page_cell_phone.png')} alt="" />
       </div>
       <div className={pageStyle.wemenImage}>
         <img src={require('./images/home_page_wemen.png')} alt="" />

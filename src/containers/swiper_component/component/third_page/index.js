@@ -59,7 +59,7 @@ export default function ThirdPage(props) {
       <div className={pageStyle.menStyle}>
         <img src={require('./images/page2_men.png')} alt="" />
       </div>
-      <div className={pageStyle.womenStyle}>
+      <div onAnimationEnd={_showInroduction} className={pageStyle.womenStyle}>
         <img src={require('./images/page2_women.png')} alt="" />
       </div>
       <div className="fade-image">

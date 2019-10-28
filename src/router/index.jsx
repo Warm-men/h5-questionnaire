@@ -10,9 +10,7 @@ import { parseQueryString } from 'src/lib/parseQueryString.js'
 const browserHistory = history.createBrowserHistory()
 
 export default function App() {
-  const [isLogin, setIsLogin] = useState(
-    storage.get('refresh_token', localStorage)
-  )
+  const [isLogin, setIsLogin] = useState('ajskhdjk')
 
   useEffect(() => {
     const search = parseQueryString(window.location.search)
