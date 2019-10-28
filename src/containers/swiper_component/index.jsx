@@ -78,7 +78,7 @@ export default function IndexContainer(props) {
 
   return (
     <div className="home-container">
-      <Helmet title="问卷调查" link="/index" />
+      <Helmet title="互联网金融消费知识小调研" link="/index" />
       <Swiper
         slideClass="custom-swiper-slide"
         wrapperClass="custom-swiper-wrapper"

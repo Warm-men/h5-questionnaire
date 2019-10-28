@@ -119,7 +119,7 @@ class ThirdPage extends React.Component {
     if (!data.length) return null
     return (
       <div className="third-page-container">
-        <Helmet title="问卷调查" link="/quiz" />
+        <Helmet title="互联网金融消费知识小调研" link="/quiz" />
         {isShowAlert ? (
           <div className="hidden-view">
             <div className="text-view">请回答完题目再提交哦!</div>
