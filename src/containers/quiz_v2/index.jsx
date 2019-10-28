@@ -3,6 +3,8 @@ import ajaxJsonp from 'src/lib/ajaxJsonp.js'
 import * as storage from 'src/lib/storage.js'
 import Helmet from 'src/lib/pagehelmet.js'
 import ListItem from './quiz_list'
+import wxInit from 'src/lib/wx_config.js'
+import { shareConfig } from 'src/router/share_config.js'
 
 class ThirdPage extends React.Component {
   constructor(props) {
@@ -17,7 +19,45 @@ class ThirdPage extends React.Component {
   }
   componentDidMount() {
     this._queryQuiz()
+    wxInit()
+    wx.ready(() => {
+      this.onMenuShareTimeline()
+      this.onMenuShareAppMessage()
+    })
   }
+
+  onMenuShareTimeline = () => {
+    // NOTE:分享朋友圈
+    wx.onMenuShareTimeline({
+      title: shareConfig.title, // 分享标题
+      link: shareConfig.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: shareConfig.imgUrl, // 分享图标
+      success: () => {
+        // 用户点击了分享后执行的回调函数
+      },
+      fail: res => {
+        wxInit(true, this.onMenuShareTimeline)
+      },
+      trigger: () => {}
+    })
+  }
+
+  onMenuShareAppMessage = () => {
+    // NOTE：分享用户
+    wx.onMenuShareAppMessage({
+      title: shareConfig.title, // 分享标题
+      desc: shareConfig.desc, // 分享描述
+      link: shareConfig.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: shareConfig.imgUrl, // 分享图标
+      success: () => {
+        // 用户点击了分享后执行的回调函数
+      },
+      fail: res => {
+        wxInit(true, this.onMenuShareAppMessage)
+      }
+    })
+  }
+
   _updateAnswer = (id, key, category_id) => {
     if (!id) return
     const index = this.answer.findIndex(item => item.id === id)

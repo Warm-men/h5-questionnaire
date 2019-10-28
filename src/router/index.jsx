@@ -42,7 +42,7 @@ export default function App() {
                   const { refresh_token, token } = loginRes.data
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
-                  browserHistory.replace('/')
+                  browserHistory.replace(window.location.pathname)
                   setIsLogin(true)
                 }
               })
