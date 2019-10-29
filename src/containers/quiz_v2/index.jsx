@@ -27,7 +27,7 @@ class ThirdPage extends React.Component {
   }
 
   onMenuShareTimeline = () => {
-    // NOTE:分享朋友圈
+    //  NOTE:分享朋友圈
     wx.onMenuShareTimeline({
       title: shareConfig.title, // 分享标题
       link: shareConfig.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
