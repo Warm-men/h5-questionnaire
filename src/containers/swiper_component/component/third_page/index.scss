@@ -16,10 +16,10 @@
     }
   }
   .title-image {
-    width: flex_pt(270);
+    width: flex_pt(250);
     position: absolute;
     top: flex_pt(75);
-    left: flex_pt(55);
+    left: flex_pt(65);
     &.jackInTheBox {
         animation: jackInTheBox .5s;
         opacity: 1;
@@ -28,20 +28,11 @@
       width: 100%;
     }
   }
-  .coin-image {
-    width: flex_pt(340);
-    position: absolute;
-    top: flex_pt(275);
-    left: flex_pt(15);
-    img {
-        width: 100%;
-    }
-  }
   .data-list-image {
-    width: flex_pt(290);
+    width: flex_pt(220);
     position: absolute;
     top: flex_pt(175);
-    left: flex_pt(35);
+    left: flex_pt(70);
     img {
         width: 100%;
     }
@@ -50,21 +41,8 @@
         opacity: 1;
     }
   }
-  .introdute-icon-image {
-    width: flex_pt(80);
-    position: absolute;
-    top: flex_pt(145);
-    right: flex_pt(125);
-    img {
-        width: 100%;
-    }
-    &.fadeIn {
-        animation: fadeIn .4s 2.4s;
-        opacity: 1;
-    }
-  }
   .men-image {
-    width: flex_pt(50);
+    width: flex_pt(40);
     position: absolute;
     top: flex_pt(175);
     right: flex_pt(180);
@@ -77,10 +55,10 @@
     }
   }
   .women-image {
-    width: flex_pt(85);
+    width: flex_pt(70);
     position: absolute;
-    top: flex_pt(190);
-    left: flex_pt(30);
+    top: flex_pt(185);
+    left: flex_pt(40);
     opacity: 0;
     img {
         width: 100%;
@@ -93,8 +71,8 @@
   .fade-image{ 
     width: flex_pt(105);
     position: absolute;
-    top: flex_pt(280);
-    right: flex_pt(-5);
+    top: flex_pt(270);
+    right: flex_pt(35);
     img {
         width: 100%;
     } 
@@ -120,34 +98,6 @@
         animation: slideInDown 2.5s infinite;
         opacity: 1;
     }
-  }
-  .pop-wrapper-view{
-      width: flex_pt(414);
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      position: absolute;
-      left: 0;
-      top: 0;
-    .introduction-image {
-        width: flex_pt(314);
-        position: absolute;
-        bottom: flex_pt(130);
-        right: flex_pt(78);
-        .hide-button {
-            width: flex_pt(50);
-            height: flex_pt(50);
-            position: absolute;
-            top: flex_pt(20);
-            right: flex_pt(25);
-        }
-        img {
-            width: 100%;
-        }
-        &.fadeIn {
-            animation: fadeIn 1s;
-            opacity: 1;
-        }
-      }
   }
   .introduction_text {
     position: absolute;
@@ -268,18 +218,7 @@
       -webkit-transform: translate3d(10px, 0, 0);
       transform: translate3d(10px, 0, 0);
     }
-}
-  
-@keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-  
-    to {
-      opacity: 1;
-    }
-}
-  
+} 
 
 @keyframes slideInLeft {
     from {
