@@ -1,6 +1,7 @@
 @import 'src/styles/flex_pt.scss';
 .third-page-container {
   min-height: 100vh;
+  position: relative;
   .bg-image {
     width: 100%;
     height: 100vh;
@@ -8,17 +9,17 @@
   .super-title-image {
     width: flex_pt(250);
     position: absolute;
-    top: flex_pt(40);
+    top: flex_pt(20);
     left: flex_pt(55);
     img{
       width: 100%;
     }
   }
   .title-image {
-    width: flex_pt(340);
+    width: flex_pt(270);
     position: absolute;
-    top: flex_pt(115);
-    left: flex_pt(15);
+    top: flex_pt(75);
+    left: flex_pt(55);
     &.jackInTheBox {
         animation: jackInTheBox .5s;
         opacity: 1;
@@ -37,10 +38,10 @@
     }
   }
   .data-list-image {
-    width: flex_pt(330);
+    width: flex_pt(290);
     position: absolute;
-    top: flex_pt(275);
-    left: flex_pt(15);
+    top: flex_pt(175);
+    left: flex_pt(35);
     img {
         width: 100%;
     }
@@ -49,23 +50,10 @@
         opacity: 1;
     }
   }
-  .mouse-image {
-    width: flex_pt(45);
-    position: absolute;
-    top: flex_pt(245);
-    right: flex_pt(105);
-    img {
-        width: 100%;
-    }
-    &.fadeIn {
-        animation: fadeIn 1s 5.5s infinite;
-        opacity: 1;
-    }
-  }
   .introdute-icon-image {
     width: flex_pt(80);
     position: absolute;
-    top: flex_pt(265);
+    top: flex_pt(145);
     right: flex_pt(125);
     img {
         width: 100%;
@@ -78,7 +66,7 @@
   .men-image {
     width: flex_pt(50);
     position: absolute;
-    top: flex_pt(290);
+    top: flex_pt(175);
     right: flex_pt(180);
     img {
         width: 100%;
@@ -91,7 +79,7 @@
   .women-image {
     width: flex_pt(85);
     position: absolute;
-    top: flex_pt(320);
+    top: flex_pt(190);
     left: flex_pt(30);
     opacity: 0;
     img {
@@ -103,10 +91,10 @@
     }
   }
   .fade-image{ 
-    width: flex_pt(125);
+    width: flex_pt(105);
     position: absolute;
-    top: flex_pt(410);
-    right: flex_pt(-15);
+    top: flex_pt(280);
+    right: flex_pt(-5);
     img {
         width: 100%;
     } 
@@ -121,10 +109,10 @@
     }
   }
   .bottom-button-image {
-    width: flex_pt(150);
+    width: flex_pt(100);
     position: absolute;
     bottom: flex_pt(15);
-    right: flex_pt(116);
+    right: flex_pt(140);
     img{
         width: 100%;
     } 
@@ -161,6 +149,17 @@
         }
       }
   }
+  .introduction_text {
+    position: absolute;
+    bottom: flex_pt(60);
+    width: 100vw;
+    padding: 10px 20px;
+    line-height: flex_pt(20);
+    font-size: 12px;
+    color: #fff;
+    box-sizing: border-box;
+    text-indent: 26px;
+  }
   
 }
 @keyframes jackInTheBox {
@@ -190,8 +189,8 @@
 }
 @keyframes slideInDown {
     from {
-      -webkit-transform: translate3d(0, -10px, 0);
-      transform: translate3d(0, -10px, 0);
+      -webkit-transform: translate3d(0, -5px, 0);
+      transform: translate3d(0, -5px, 0);
       visibility: visible;
     }
 

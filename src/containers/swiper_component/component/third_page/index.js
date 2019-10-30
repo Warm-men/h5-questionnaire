@@ -1,17 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import './index.scss'
 
 export default function ThirdPage(props) {
   const { currentPageIndex } = props
-  const [showInroduction, setShowInroduction] = useState(false)
   const pageStyle = useMemo(() => {
-    if (currentPageIndex === 2) {
+    if (currentPageIndex === 1) {
       return {
         titleStyle: 'jackInTheBox title-image',
         bottomButtonStyle: 'bottom-button-image slideInDown',
         dataListStyle: 'jello data-list-image',
         menStyle: 'men-image shake',
-        introduteIconStyle: 'introdute-icon-image fadeIn',
         mouseStyle: 'mouse-image fadeIn',
         womenStyle: 'women-image slideInLeft'
       }
@@ -21,20 +19,16 @@ export default function ThirdPage(props) {
         bottomButtonStyle: 'bottom-button-image',
         dataListStyle: 'data-list-image',
         menStyle: 'men-image',
-        introduteIconStyle: 'introdute-icon-image',
         mouseStyle: 'mouse-image',
         womenStyle: 'women-image'
       }
     }
   }, [currentPageIndex])
-
-  const _showInroduction = () => setShowInroduction(true)
-  const _hideInroduction = () => setShowInroduction(false)
   const goQuizPage = () => props.history.push('/quiz')
   return (
     <div className="third-page-container">
       <img
-        src={require('../second_page/images/commem_bg.jpg')}
+        src={require('./images/commen_bg.jpg')}
         alt=""
         className="bg-image"
       />
@@ -42,43 +36,28 @@ export default function ThirdPage(props) {
         <img src={require('../second_page/images/super_title.png')} alt="" />
       </div>
       <div className={pageStyle.titleStyle}>
-        <img src={require('../second_page/images/title.png')} alt="" />
+        <img src={require('./images/page_3_title.png')} alt="" />
       </div>
       <div className={pageStyle.dataListStyle}>
         <img src={require('./images/page2_data_list.png')} alt="" />
       </div>
-      <div className="coin-image">
-        <img src={require('../second_page/images/page1_coin.png')} alt="" />
-      </div>
-      <div onClick={_showInroduction} className={pageStyle.mouseStyle}>
-        <img src={require('./images/page2_mouse_icon.png')} alt="" />
-      </div>
-      <div onClick={_showInroduction} className={pageStyle.introduteIconStyle}>
-        <img src={require('./images/page2_introdute_icon.png')} alt="" />
-      </div>
       <div className={pageStyle.menStyle}>
         <img src={require('./images/page2_men.png')} alt="" />
       </div>
-      <div onAnimationEnd={_showInroduction} className={pageStyle.womenStyle}>
+      <div className={pageStyle.womenStyle}>
         <img src={require('./images/page2_women.png')} alt="" />
       </div>
       <div className="fade-image">
         <img src={require('./images/page2_fade_img_icon.png')} alt="" />
       </div>
-      <div className="plant-image">
-        <img src={require('../second_page/images/plant_v2.png')} alt="" />
-      </div>
       <div className={pageStyle.bottomButtonStyle} onClick={goQuizPage}>
         <img src={require('./images/page2_bottom_button.png')} alt="" />
       </div>
-      {showInroduction ? (
-        <div className="pop-wrapper-view">
-          <div className={'introduction-image fadeIn'}>
-            <div className="hide-button" onClick={_hideInroduction} />
-            <img src={require('./images/page2_introdution_pop.png')} alt="" />
-          </div>
-        </div>
-      ) : null}
+      <div className="introduction_text">
+        为积极响应中国人民银行、中国银保监会、中国证监会、国家网信办共同启动的2019年“金融知识普及月
+        金融知识进万家 争做理性投资者
+        争做金融好网民”活动，进一步了解消费者金融知识的薄弱环节和金融需求，引导金融消费者理性消费，加强金融知识宣传教育的针对性，中国互联网金融协会金融消费权益保护与教育培训专业委员会制作本调查问卷，请您协助填写。我们承诺，本问卷仅用于研究目的，会严格对您提供和描述的信息保密，不会对外泄露您的个人信息，不会对接受问卷调查的个人进行个体分析。感谢您的支持与配合！
+      </div>
     </div>
   )
 }

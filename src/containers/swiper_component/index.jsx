@@ -4,7 +4,7 @@ import wxInit from 'src/lib/wx_config.js'
 import Swiper from 'react-id-swiper'
 import './index.scss'
 import 'react-id-swiper/lib/styles/css/swiper.css'
-import { FirstPage, SecondPage, ThirdPage } from './component'
+import { FirstPage, ThirdPage } from './component'
 import { shareConfig } from 'src/router/share_config.js'
 
 export default function IndexContainer(props) {
@@ -71,9 +71,6 @@ export default function IndexContainer(props) {
       >
         <div className="swiper-image">
           <FirstPage currentPageIndex={currentPageIndex} />
-        </div>
-        <div className="swiper-image">
-          <SecondPage currentPageIndex={currentPageIndex} />
         </div>
         <div className="swiper-image">
           <ThirdPage
