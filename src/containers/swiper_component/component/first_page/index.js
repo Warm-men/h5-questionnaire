@@ -34,7 +34,7 @@ export default function FirstPage(props) {
         <img src={require('./images/home_page_wemen.png')} alt="" />
       </div>
       <div className="arrow-image fadeInDown">
-        <img src={require('../second_page/images/arrow_down.png')} alt="" />
+        <img src={require('./images/home_page_arrow.png')} alt="" />
       </div>
     </div>
   )
