@@ -19,7 +19,7 @@ class ThirdPage extends React.Component {
   }
   componentDidMount() {
     this._queryQuiz()
-    wxInit()
+    // wxInit()
     wx.ready(() => {
       this.onMenuShareTimeline()
       this.onMenuShareAppMessage()
