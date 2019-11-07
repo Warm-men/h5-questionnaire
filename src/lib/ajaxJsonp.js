@@ -1,112 +1,54 @@
-import * as storage from './storage'
+import { ajax } from 'jquery'
+import * as storage from './storage.js'
 import wxLogin from './wx_login'
 
-const defaultOptions = {
-  time: 5000,
-  jsonpCallback: 'callback',
-  jsonpCallbackFunction: null
+const handleError = (error, res) => {
+  error && error(res)
 }
 
-function generateCallbackFunction() {
-  return `jsonp_${Date.now()}_${Math.ceil(Math.random() * 100000)}`
+const handleSuccess = (success, res) => {
+  success && success(res)
 }
 
-const handleTimeOut = (timeout, res) => timeout && timeout(res)
-
-const handleError = (error, res) => error && error(res)
-
-const handleSuccess = (success, res) => success && success(res)
-
-function handleData(data, isNotParams) {
+const handleData = (data, isNotParams) => {
   if (isNotParams) {
     return data
-  } else {
-    return storage.get('token', localStorage)
-      ? {
-          params: JSON.stringify(data),
-          token: storage.get('token', localStorage)
-        }
-      : { params: JSON.stringify(data) }
+  }
+  if (storage.get('token', localStorage)) {
+    return {
+      params: JSON.stringify(data),
+      token: storage.get('token', localStorage)
+    }
+  }
+  return {
+    params: JSON.stringify(data)
   }
 }
 
-function jsonToUrl(data) {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
-
-// NOTE:成功后需要清理生成的script等
-function clearJsonp(callbackFunction, scriptId, timeoutId) {
-  timeoutId && clearTimeout(timeoutId)
-  try {
-    delete window[callbackFunction]
-  } catch (e) {
-    window[callbackFunction] = undefined
-  }
-  const script = document.getElementById(scriptId)
-  script && document.getElementsByTagName('head')[0].removeChild(script)
-}
-
-export default function fetchJsonp(params) {
-  const {
-    url,
-    data,
-    success,
-    error,
-    jsonpCallbackFunction,
-    jsonpCallback = defaultOptions.jsonpCallback,
-    charset,
-    isNotParams,
-    time = defaultOptions.time,
-    timeout
-  } = params
-
-  let timeoutId
-
-  return new Promise((resolve, reject) => {
-    const callbackFunction = jsonpCallbackFunction || generateCallbackFunction()
-    const scriptId = `${jsonpCallback}_${callbackFunction}`
-    const paramsUrl = jsonToUrl(handleData(data, isNotParams))
-    const jsonUrl = `${global.apiUrl +
-      url}?${jsonpCallback}=${callbackFunction}&${paramsUrl}`
-
-    window[callbackFunction] = data => {
-      // NOTE: code不为1005才算成功
+const fetchJsonp = formData => {
+  let { url, data, success, error, isNotParams, method } = formData
+  ajax({
+    url: global.apiUrl + url,
+    data: handleData(data, isNotParams),
+    type: method ? method : 'GET',
+    dataType: 'jsonp', //指定服务器返回的数据类型
+    success: data => {
       if (data.code === 1005) {
         storage.remove('refresh_token', localStorage)
-        wxLogin(() => fetchJsonp(params))
+        wxLogin(() => {
+          fetchJsonp(formData)
+        })
         handleError(error, data)
-      } else {
-        data.code !== global.apiSuccess
-          ? handleError(error, data)
-          : handleSuccess(success, data)
+        return null
       }
-      clearJsonp(callbackFunction, scriptId, timeoutId)
-      resolve(data)
-    }
-
-    // NOTE：超时处理
-    timeoutId = setTimeout(() => {
-      reject(new Error(`JSONP request to ${url} timed out`))
-      handleTimeOut(timeout)
-      clearJsonp(callbackFunction, scriptId, timeoutId)
-    }, time)
-
-    // NOTE：增加Script标签发起请求
-    const jsonpScript = document.createElement('script')
-    jsonpScript.setAttribute('src', jsonUrl)
-    if (charset) {
-      jsonpScript.setAttribute('charset', charset)
-    }
-    jsonpScript.id = scriptId
-    document.getElementsByTagName('head')[0].appendChild(jsonpScript)
-
-    // Caught if got 404/500
-    jsonpScript.onerror = () => {
-      reject(new Error(`JSONP request to ${url} failed`))
-      handleError(error)
-      clearJsonp(callbackFunction, scriptId, timeoutId)
+      data.code !== global.apiSuccess
+        ? handleError(error, data)
+        : handleSuccess(success, data)
+    },
+    error: data => {
+      handleError(error, data)
     }
   })
 }
+
+export default fetchJsonp
