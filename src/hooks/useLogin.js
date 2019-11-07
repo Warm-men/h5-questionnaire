@@ -6,13 +6,11 @@ import { createBrowserHistory } from 'history'
 import { parseQueryString } from 'src/lib/parseQueryString.js'
 
 export default function useLogin() {
-  console.log(2)
   const [isLogin, setIsLogin] = useState(
     storage.get('refresh_token', localStorage)
   )
 
   useEffect(() => {
-    console.log(1)
     const search = parseQueryString(window.location.search)
     // 新用户还没有登录过
     if (!isLogin) {
