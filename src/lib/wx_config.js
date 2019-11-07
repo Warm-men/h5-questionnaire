@@ -21,6 +21,7 @@ const wxInit = (isFirstConfigUrl = true) => {
     url: '/api/Account/getWechatConfig',
     type: 'GET',
     data: { url },
+    isNotParams: true,
     dataType: 'jsonp', //指定服务器返回的数据类型
     success: res => {
       const { appId, timestamp, nonceStr, signature } = res.data

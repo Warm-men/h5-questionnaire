@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react'
 import ajaxJsonp from 'src/lib/ajaxJsonp.js'
 import wxLogin from 'src/lib/wx_login.js'
 import * as storage from 'src/lib/storage.js'
+import { createBrowserHistory } from 'history'
 import { parseQueryString } from 'src/lib/parseQueryString.js'
 
-export default function App() {
+export default function useLogin() {
+  console.log(2)
   const [isLogin, setIsLogin] = useState(
     storage.get('refresh_token', localStorage)
   )
 
   useEffect(() => {
-    console.log(isLogin)
+    console.log(1)
     const search = parseQueryString(window.location.search)
     // 新用户还没有登录过
     if (!isLogin) {
@@ -38,7 +40,8 @@ export default function App() {
                   const { refresh_token, token } = loginRes.data
                   storage.set('refresh_token', refresh_token, localStorage)
                   storage.set('token', token, localStorage)
-                  // browserHistory.replace(window.location.pathname)
+                  const history = createBrowserHistory()
+                  history.replace(window.location.pathname)
                   setIsLogin(true)
                 }
               })
