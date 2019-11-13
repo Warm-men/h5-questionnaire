@@ -44,6 +44,7 @@
     "jest-resolve": "23.6.0",
     "jest-watch-typeahead": "^0.2.1",
     "jquery": "3.4.0",
+    "lint-staged": "^10.0.0-1",
     "mini-css-extract-plugin": "0.5.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
@@ -63,10 +64,19 @@
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.2.0"
   },
+  "lint-staged": {
+    "src/app/**/*.{js,jsx,css,scss,json}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
   "scripts": {
     "start": "node scripts/start.js",
+    "prettier": "prettier --single-quote --no-semi --print-width 80 --write 'src/app/**/*.{js,jsx,css,scss,json}'",
+    "precommit": "lint-staged",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "commit": "git-cz"
   },
   "eslintConfig": {
     "extends": "react-app"

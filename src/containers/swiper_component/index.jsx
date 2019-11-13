@@ -61,6 +61,8 @@ export default function IndexContainer(props) {
     setIndex(0)
   }, [])
 
+  console.log('test  prettier commit')
+
   return (
     <div className="home-container">
       <Helmet title="互联网金融消费知识小调研" link="/index" />
