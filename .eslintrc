@@ -1,10 +1,11 @@
 {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "legacyDecorators": true
     }
   },
-  "extends": "react-app",
+  "extends": ["plugin:@typescript-eslint/recommended", "react-app"],
   "globals": {
     "React": true,
     "_": true,
