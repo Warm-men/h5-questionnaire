@@ -1,60 +1,99 @@
-import { useState, useEffect, useRef } from 'react'
 import './index.scss'
 import ajaxJsonp from 'src/lib/ajaxJsonp.js'
 import * as storage from 'src/lib/storage.js'
 import Helmet from 'src/lib/pagehelmet.js'
 import ListItem from './quiz_list'
-import useShare from 'src/hooks/useShare.js'
+import wxInit from 'src/lib/wx_config.js'
+import { shareConfig } from 'src/router/share_config.js'
 
-export default function ThirdPage(props) {
-  const [data, setData] = useState([])
-  const [isShowAlert, setIsShowAlert] = useState(false)
-  const [isShowFinishedAlert, setIsShowFinishedAlert] = useState(false)
-  const [showShareGuid, setShowShareGuid] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const answer = useRef([])
-
-  useShare()
-
-  useEffect(() => {
-    queryQuiz()
-  }, [])
-
-  const updateAnswer = (id, key, category_id) => {
-    if (!id) return
-    const index = answer.current.findIndex(item => item.id === id)
-
-    if (index !== -1) {
-      answer.current[index] = { id, user_answer: key, category_id }
-    } else {
-      answer.current.push({ id, user_answer: key, category_id })
+class ThirdPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: [],
+      isShowAlert: false,
+      isShowFinishedAlert: false,
+      showShareGuid: false
     }
+    this.answer = []
+  }
+  componentDidMount() {
+    this._queryQuiz()
+    wxInit()
+    wx.ready(() => {
+      this.onMenuShareTimeline()
+      this.onMenuShareAppMessage()
+    })
   }
 
-  const queryQuiz = () => {
-    let timer = null
+  onMenuShareTimeline = () => {
+    //  NOTE:分享朋友圈
+    wx.onMenuShareTimeline({
+      title: shareConfig.title, // 分享标题
+      link: shareConfig.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: shareConfig.imgUrl, // 分享图标
+      success: () => {
+        // 用户点击了分享后执行的回调函数
+      },
+      fail: res => {
+        wxInit(true, this.onMenuShareTimeline)
+      },
+      trigger: () => {}
+    })
+  }
+
+  onMenuShareAppMessage = () => {
+    // NOTE：分享用户
+    wx.onMenuShareAppMessage({
+      title: shareConfig.title, // 分享标题
+      desc: shareConfig.desc, // 分享描述
+      link: shareConfig.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: shareConfig.imgUrl, // 分享图标
+      success: () => {
+        // 用户点击了分享后执行的回调函数
+      },
+      fail: res => {
+        wxInit(true, this.onMenuShareAppMessage)
+      }
+    })
+  }
+
+  _updateAnswer = (id, key, category_id) => {
+    if (!id) return
+    const index = this.answer.findIndex(item => item.id === id)
+
+    if (index !== -1) {
+      this.answer[index] = { id, user_answer: key, category_id }
+    } else {
+      this.answer.push({ id, user_answer: key, category_id })
+    }
+  }
+  _queryQuiz = () => {
     ajaxJsonp({
       url: '/api/Pintu/getQuestion',
       data: { token: storage.get('token', localStorage) },
       method: 'POST',
       success: res => {
-        timer && clearTimeout(timer)
-        setData(res.data)
+        this.timer = null
+        let { data } = res
+        this.setState({ data })
       },
       error: e => {
-        timer = setTimeout(queryQuiz, 2000)
+        this.timer = setTimeout(this._queryQuiz, 2000)
       }
     })
   }
 
-  const checkFinishedQuiz = () => {
+  _checkFinishedQuiz = () => {
     let quizList = []
-    data.map(item => item.list && (quizList = [...quizList, ...item.list]))
+    this.state.data.map(item => {
+      return item.list && (quizList = [...quizList, ...item.list])
+    })
     let textQuizCount = 0
     quizList.map(item => item.category_id === 2 && textQuizCount++) //选填题目数目
-    const resultLength = answer.current.length
+    const resultLength = this.answer.length
     if (resultLength <= quizList.length - textQuizCount) {
-      const ids = answer.current.map(item => item.id)
+      const ids = this.answer.map(item => item.id)
       const unRequiredQuiz = quizList.filter(item => !ids.includes(item.id))
       const unRequiredQuizIdIndex = unRequiredQuiz.findIndex(
         item => item.category_id === 1 || item.category_id === 3
@@ -70,97 +109,112 @@ export default function ThirdPage(props) {
     }
   }
 
-  const showAlert = () => {
-    setIsShowAlert(true)
-    setTimeout(hideAlert, 2000)
-  }
+  _showAlert = () =>
+    this.setState({ isShowAlert: true }, () => {
+      setTimeout(this._hideAlert, 2000)
+    })
 
-  const hideAlert = () => setIsShowAlert(false)
+  _hideAlert = () => this.setState({ isShowAlert: false })
 
-  const submitQuiz = () => {
-    if (loading) return null
-    const isFinishedQuiz = checkFinishedQuiz()
+  _submitQuiz = () => {
+    if (this.isLoading) return null
+    const isFinishedQuiz = this._checkFinishedQuiz()
     if (!isFinishedQuiz) {
-      showAlert()
+      this._showAlert()
       return null
     }
-    setLoading(true)
+    this.isLoading = true
 
     ajaxJsonp({
       url: '/api/Pintu/subQuestion',
       data: {
         token: storage.get('token', localStorage),
-        params: { answer: JSON.stringify(answer.current) }
+        params: {
+          answer: JSON.stringify(this.answer)
+        }
       },
+      method: 'POST',
       success: res => {
-        hanldeFinishedSub()
-        setLoading(false)
+        this._hanldeFinishedSub()
+        this.isLoading = false
       },
-      error: () => setLoading(false)
+      error: () => {
+        this.isLoading = false
+      }
     })
   }
 
-  const hanldeFinishedSub = () => setIsShowFinishedAlert(true)
+  _hanldeFinishedSub = () => this.setState({ isShowFinishedAlert: true })
 
-  const onClosePage = () => props.history.push('/index')
+  _onClosePage = () => {
+    this.setState({ isShowFinishedAlert: false, showShareGuid: false }, () => {
+      this.props.history.push('/index')
+    })
+  }
 
-  const openGuid = () => setShowShareGuid(true)
+  _openGuid = () => this.setState({ showShareGuid: true })
 
-  if (!data.length) return null
-  return (
-    <div className="third-page-container">
-      <Helmet title="互联网金融消费知识小调研" link="/quiz" />
-      {isShowAlert ? (
-        <div className="hidden-view">
-          <div className="text-view">请回答完题目再提交哦!</div>
-        </div>
-      ) : null}
-      {isShowFinishedAlert ? (
-        <div className="finished-view">
-          <div className="image-view">
-            <div className="close-button" onClick={onClosePage} />
-            <img src={require('./images/finished_image.png')} alt="" />
-            <div className="open-guid" onClick={openGuid} />
+  render() {
+    const { data, isShowAlert, isShowFinishedAlert, showShareGuid } = this.state
+    if (!data.length) return null
+    return (
+      <div className="third-page-container">
+        <Helmet title="互联网金融消费知识小调研" link="/quiz" />
+        {isShowAlert ? (
+          <div className="hidden-view">
+            <div className="text-view">请回答完题目再提交哦!</div>
           </div>
-          {showShareGuid ? (
-            <div className="guid-view">
-              <img src={require('./images/share_arrow.png')} alt="" />
+        ) : null}
+        {isShowFinishedAlert ? (
+          <div className="finished-view">
+            <div className="image-view">
+              <div className="close-button" onClick={this._onClosePage} />
+              <img src={require('./images/finished_image.png')} alt="" />
+              <div className="open-guid" onClick={this._openGuid} />
             </div>
-          ) : null}
+            {showShareGuid ? (
+              <div className="guid-view">
+                <img src={require('./images/share_arrow.png')} alt="" />
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
+        <div className="bg-image">
+          <img src={require('./images/page3_bg.png')} alt="" />
         </div>
-      ) : null}
-      <div className="bg-image">
-        <img src={require('./images/page3_bg.png')} alt="" />
+        <div>
+          <div className="title-view">
+            <img
+              src={require('../swiper_component/component/second_page/images/super_title.png')}
+              alt=""
+            />
+          </div>
+          <div className="sub-title-view">
+            <img
+              src={require('../../containers/swiper_component/component/second_page/images/title.png')}
+              alt=""
+            />
+          </div>
+        </div>
+        {data.map((item, index) => {
+          return (
+            <ListItem
+              item={item}
+              updateAnswer={this._updateAnswer}
+              key={index}
+              index={index}
+            />
+          )
+        })}
+        <div className="submit-button-view">
+          <div className="button-view" onClick={this._submitQuiz}>
+            <img src={require('./images/submit_button.jpg')} alt="" />
+          </div>
+        </div>
       </div>
-      <div>
-        <div className="title-view">
-          <img
-            src={require('../swiper_component/component/second_page/images/super_title.png')}
-            alt=""
-          />
-        </div>
-        <div className="sub-title-view">
-          <img
-            src={require('../../containers/swiper_component/component/second_page/images/title.png')}
-            alt=""
-          />
-        </div>
-      </div>
-      {data.map((item, index) => {
-        return (
-          <ListItem
-            item={item}
-            updateAnswer={updateAnswer}
-            key={index}
-            index={index}
-          />
-        )
-      })}
-      <div className="submit-button-view">
-        <div className="button-view" onClick={submitQuiz}>
-          <img src={require('./images/submit_button.jpg')} alt="" />
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
 }
+
+export default ThirdPage

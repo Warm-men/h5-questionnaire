@@ -1,4 +1,4 @@
-import ajaxJsonp from 'src/lib/ajaxJsonp.js'
+import { ajax } from 'jquery'
 import deviceType from 'src/lib/device_type.js'
 
 const DEBUG = false
@@ -17,11 +17,12 @@ const wxInit = (isFirstConfigUrl = true) => {
     VERIFY_NUMBER = 0
   }
   const url = whichUrl(isFirstConfigUrl)
-  ajaxJsonp({
-    url: '/api/Account/getWechatConfig',
+  ajax({
+    url: global.apiUrl + '/api/Account/getWechatConfig',
     type: 'GET',
-    data: { url },
-    isNotParams: true,
+    data: {
+      url
+    },
     dataType: 'jsonp', //指定服务器返回的数据类型
     success: res => {
       const { appId, timestamp, nonceStr, signature } = res.data
